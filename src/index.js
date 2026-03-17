@@ -5,52 +5,24 @@ export default {
     const domain = "pinoyseoul.com";
     const blogId = "1152873755750876729";
 
+    // Append ?authuser=pinoyseoul.com to force the target app to select the correct session
     const actions = {
-      // 📂 DRIVE: TEAM SHARED DRIVES
-      "drive.pinoyseoul.com":    `https://drive.google.com/drive/u/0/shared-drives`,
-
-      // 📄 DOCS/SHEETS/SLIDES: NEW Actions
-      // .new shortcuts support /a/domain/ and authuser in the URL path
-      "docs.pinoyseoul.com":     `https://docs.new/a/${domain}/`,
-      "sheets.pinoyseoul.com":   `https://sheets.new/a/${domain}/`,
-      "slides.pinoyseoul.com":   `https://slides.new/a/${domain}/`,
-
-      // 📧 MAIL: NEW COMPOSE
-      "mail.pinoyseoul.com":     `https://mail.google.com/mail/u/0/?view=cm&fs=1`,
-
-      // 🎥 MEET: NEW MEETING
-      "meet.pinoyseoul.com":     `https://meet.new/a/${domain}/`,
-
-      // 🗓️ CALENDAR: NEW EVENT
-      "calendar.pinoyseoul.com": `https://cal.new/a/${domain}/`,
-
-      // 🧑‍🤝‍🧑 GROUPS: ADMIN GROUP
+      "drive.pinoyseoul.com":    `https://drive.google.com/drive/shared-drives?authuser=${domain}`,
+      "docs.pinoyseoul.com":     `https://docs.google.com/document/create?authuser=${domain}`,
+      "sheets.pinoyseoul.com":   `https://docs.google.com/spreadsheets/create?authuser=${domain}`,
+      "slides.pinoyseoul.com":   `https://docs.google.com/presentation/create?authuser=${domain}`,
+      "mail.pinoyseoul.com":     `https://mail.google.com/mail/?view=cm&fs=1&authuser=${domain}`,
+      "meet.pinoyseoul.com":     `https://meet.google.com/new?authuser=${domain}`,
+      "calendar.pinoyseoul.com": `https://calendar.google.com/calendar/r/eventedit?authuser=${domain}`,
       "groups.pinoyseoul.com":   `https://groups.google.com/a/${domain}/g/admin`,
-
-      // 💬 CHAT: DIRECT WORKSPACE CHAT
-      "chat.pinoyseoul.com":     `https://chat.google.com/u/0/app/chat/AAQAotoa0bE`,
-
-      // 📝 FORMS/SITES: NEW Actions
-      "forms.pinoyseoul.com":    `https://forms.new/a/${domain}/`,
-      "sites.pinoyseoul.com":    `https://sites.new/a/${domain}/`,
-
-      // 💡 KEEP: NEW NOTE Action
-      "keep.pinoyseoul.com":     `https://keep.new/a/${domain}/`,
-
-      // ✅ TASKS: NEW TASK
-      "tasks.pinoyseoul.com":    `https://tasks.new/a/${domain}/`,
-
-      // 👤 CONTACTS: NEW CONTACT
-      "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
-
-      // 💻 SCRIPT: ALL PROJECTS
-      "script.pinoyseoul.com":   `https://script.google.com/home/all`,
-
-      // ✍️ BLOGGER: NEW BLOG POST
-      // Blogger uses a different auth pattern. Switching to a direct service URL that triggers account check.
-      "blog.pinoyseoul.com":     `https://www.blogger.com/blog-post.g?blogID=${blogId}`,
-
-      // 🛡️ ADMIN: USER MANAGEMENT
+      "chat.pinoyseoul.com":     `https://chat.google.com/app/chat/AAQAotoa0bE?authuser=${domain}`,
+      "forms.pinoyseoul.com":    `https://docs.google.com/forms/create?authuser=${domain}`,
+      "sites.pinoyseoul.com":    `https://sites.google.com/new?authuser=${domain}`,
+      "keep.pinoyseoul.com":     `https://keep.google.com/?authuser=${domain}#create`,
+      "tasks.pinoyseoul.com":    `https://calendar.google.com/calendar/r/tasks?authuser=${domain}`,
+      "contacts.pinoyseoul.com": `https://contacts.google.com/new?authuser=${domain}`,
+      "script.pinoyseoul.com":   `https://script.google.com/home/all?authuser=${domain}`,
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/post/edit/new/${blogId}?authuser=${domain}`,
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
 
@@ -58,11 +30,14 @@ export default {
 
     if (targetUrl) {
       /**
-       * 🛡️ THE ENFORCER (Ironclad Method):
-       * By using the /a/domain/ prefix on the ServiceLogin, we force Google to 
-       * recognize the session for that Workspace organization.
+       * 🛡️ THE ULTIMATE ZERO-FRICTION ENFORCER:
+       * We use the standard Accounts ServiceLogin (not the /a/domain/ one to prevent 403s on Keep/Blogger).
+       * 1. 'hd=pinoyseoul.com' forces Google to verify a PinoySeoul session exists. If not, it shows the login screen.
+       * 2. If already logged in, ServiceLogin skips the prompt entirely (Zero Friction).
+       * 3. The 'continue' URL contains 'authuser=pinoyseoul.com', which guarantees that once the user 
+       *    lands on Docs/Drive/Blogger, it doesn't accidentally fall back to their personal Gmail.
        */
-      const enforcerUrl = `https://www.google.com/a/${domain}/ServiceLogin?continue=${encodeURIComponent(targetUrl)}`;
+      const enforcerUrl = `https://accounts.google.com/ServiceLogin?hd=${domain}&continue=${encodeURIComponent(targetUrl)}`;
       
       return Response.redirect(enforcerUrl, 302);
     }
