@@ -18,10 +18,10 @@ export default {
       "forms.pinoyseoul.com":    `https://docs.google.com/forms/u/0/create`,
       "sites.pinoyseoul.com":    `https://sites.google.com/u/0/new`,
       "keep.pinoyseoul.com":     `https://keep.google.com/u/0/`,
-      "tasks.pinoyseoul.com":    `https://assistant.google.com/tasks`,
+      "tasks.pinoyseoul.com":    `https://tasks.google.com/u/0/`,
       "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
-      "scripts.pinoyseoul.com":  `https://script.google.com/home/all`,
-      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/post/edit/new/${blogId}`,
+      "script.pinoyseoul.com":   `https://script.google.com/home/all`,
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog-post.g?blogID=${blogId}`,
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
 
