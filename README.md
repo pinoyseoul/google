@@ -15,6 +15,9 @@ This Cloudflare Worker handles one-to-one subdomain redirects for Google Workspa
 | `groups.pinoyseoul.com` | Jumps to **Admin Group** |
 | `chat.pinoyseoul.com` | Opens **Specific Team Chat** |
 | `keep.pinoyseoul.com` | Creates a **New Note** instantly |
+| `tasks.pinoyseoul.com` | Opens **Google Tasks** dashboard |
+| `scripts.pinoyseoul.com` | Jumps to **All Apps Scripts** |
+| `contacts.pinoyseoul.com` | Creates a **New Contact** instantly |
 
 ## 🛠 Setup & Deployment
 

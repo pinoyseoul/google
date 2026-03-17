@@ -41,6 +41,15 @@ export default {
       // 💡 KEEP: Creates a NEW NOTE instantly
       "keep.pinoyseoul.com":     `https://keep.new`,
 
+      // ✅ TASKS: Opens Tasks in full view (Add Task focus)
+      "tasks.pinoyseoul.com":    `https://assistant.google.com/tasks`,
+
+      // 💻 SCRIPTS: Jumps to ALL Apps Script projects
+      "scripts.pinoyseoul.com":  `https://script.google.com/home/all`,
+
+      // 👤 CONTACTS: Opens "CREATE NEW CONTACT" screen instantly
+      "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
+
       // 🛡️ ADMIN: Direct access to USER MANAGEMENT
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
