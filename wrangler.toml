@@ -1,4 +1,4 @@
-name = "google-productivity-redirects"
+name = "google"
 main = "src/index.js"
 compatibility_date = "2024-03-17"
 
