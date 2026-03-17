@@ -5,7 +5,8 @@ export default {
     const domain = "pinoyseoul.com";
     const blogId = "1152873755750876729";
 
-    const actions = {
+    // 1. DEFINE THE DIRECT ACTIONS (Pure targets, no hardcoding u/0)
+    const targets = {
       // 📂 DRIVE: Jumps straight to TEAM SHARED DRIVES
       "drive.pinoyseoul.com":    `https://drive.google.com/drive/shared-drives`,
 
@@ -29,7 +30,7 @@ export default {
       // 💬 CHAT: DIRECT PINONYSEOUL CHAT
       "chat.pinoyseoul.com":     `https://chat.google.com/app/chat/AAQAotoa0bE`,
 
-      // 📝 FORMS/SITES: NEW
+      // 📝 FORMS/SITES: Direct Creation
       "forms.pinoyseoul.com":    `https://docs.google.com/forms/create`,
       "sites.pinoyseoul.com":    `https://sites.google.com/new`,
 
@@ -37,28 +38,28 @@ export default {
       "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
       "script.pinoyseoul.com":   `https://script.google.com/home/all`,
 
-      // ✍️ BLOGGER: DASHBOARD (Safe URL to avoid 403)
-      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/posts/${blogId}`,
+      // ✍️ BLOGGER: Direct to the specific Blog Dashboard
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog-post.g?blogID=${blogId}`,
 
       // 🛡️ ADMIN: USER MANAGEMENT
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
 
-    const targetUrl = actions[host];
+    const actionTarget = targets[host];
 
-    if (targetUrl) {
+    if (actionTarget) {
       /**
-       * 🛡️ THE SILENT BOUNCER LOGIC:
-       * 1. We use ServiceLogin with hd=domain to force the organizational context.
-       * 2. We add authuser=domain as a hint to help Google auto-select the session.
-       * 3. This combination is the "Gold Standard" for bypassing the Account Chooser
-       *    for already logged-in Workspace users.
+       * 🛡️ THE "SMART IDENTITY" ENFORCER:
+       * We use the /a/domain/ prefix. This is the official Google Workspace entry point.
+       * 
+       * 1. It scans ALL logged-in sessions for one matching '@pinoyseoul.com'.
+       * 2. If found, it uses that session index (u/1, u/5, etc.) automatically.
+       * 3. If NOT found, it forces the user to log in to a PinoySeoul account.
+       * 4. It prevents the "Hallucination" because it explicitly requires the Workspace context.
        */
-      const separator = targetUrl.includes('?') ? '&' : '?';
-      const finalTarget = `${targetUrl}${separator}authuser=${domain}`;
-      const directUrl = `https://accounts.google.com/ServiceLogin?hd=${domain}&authuser=${domain}&continue=${encodeURIComponent(finalTarget)}`;
+      const enforcerUrl = `https://www.google.com/a/${domain}/ServiceLogin?continue=${encodeURIComponent(actionTarget)}`;
       
-      return Response.redirect(directUrl, 302);
+      return Response.redirect(enforcerUrl, 302);
     }
 
     return fetch(request);
