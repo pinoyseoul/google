@@ -3,52 +3,43 @@ export default {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
     const domain = "pinoyseoul.com";
+    
+    // This helper ensures Google selects the right account automatically
+    const auth = `?authuser=${domain}&hd=${domain}`;
 
     const actions = {
-      // 📂 DRIVE: Jumps straight to TEAM SHARED DRIVES
-      "drive.pinoyseoul.com":    `https://drive.google.com/drive/u/0/shared-drives`,
+      // 📂 DRIVE: TEAM SHARED DRIVES
+      "drive.pinoyseoul.com":    `https://drive.google.com/drive/u/0/shared-drives${auth}`,
 
-      // 📄 DOCS: Creates a BRAND NEW DOCUMENT instantly
-      "docs.pinoyseoul.com":     `https://docs.new`,
+      // 📄 DOCS/SHEETS/SLIDES: BRAND NEW
+      "docs.pinoyseoul.com":     `https://docs.google.com/document/u/0/create${auth}`,
+      "sheets.pinoyseoul.com":   `https://docs.google.com/spreadsheets/u/0/create${auth}`,
+      "slides.pinoyseoul.com":   `https://docs.google.com/presentation/u/0/create${auth}`,
 
-      // 📊 SHEETS: Creates a BRAND NEW SPREADSHEET instantly
-      "sheets.pinoyseoul.com":   `https://sheets.new`,
+      // 📧 MAIL: NEW COMPOSE WINDOW
+      "mail.pinoyseoul.com":     `https://mail.google.com/mail/u/0/?view=cm&fs=1&authuser=${domain}`,
 
-      // 📧 MAIL: Opens a NEW COMPOSE WINDOW (Full screen)
-      "mail.pinoyseoul.com":     `https://mail.google.com/mail/u/0/?view=cm&fs=1`,
+      // 🎥 MEET: NEW MEETING
+      "meet.pinoyseoul.com":     `https://meet.google.com/new${auth}`,
 
-      // 🎥 MEET: Instantly generates a NEW MEETING link
-      "meet.pinoyseoul.com":     `https://meet.new`,
+      // 🗓️ CALENDAR: CREATE NEW EVENT
+      "calendar.pinoyseoul.com": `https://calendar.google.com/calendar/u/0/r/eventedit${auth}`,
 
-      // 🗓️ CALENDAR: Opens the "CREATE NEW EVENT" screen instantly
-      "calendar.pinoyseoul.com": `https://cal.new`,
+      // 🧑‍🤝‍🧑 GROUPS: ADMIN GROUP
+      "groups.pinoyseoul.com":   `https://groups.google.com/a/${domain}/g/admin`,
 
-      // 🧑‍🤝‍🧑 GROUPS: Jumps straight into the SPECIFIC Group
-      "groups.pinoyseoul.com":     `https://groups.google.com/a/pinoyseoul.com/g/admin`,
+      // 💬 CHAT: DIRECT PINONYSEOUL CHAT
+      "chat.pinoyseoul.com":     `https://chat.google.com/u/0/app/chat/AAQAotoa0bE?hd=${domain}`,
 
-      // 💬 CHAT: Jumps straight into the WORKSPACE CHAT
-      "chat.pinoyseoul.com":     `https://chat.google.com/u/0/app/chat/AAQAotoa0bE`,
+      // 📝 FORMS/SITES: NEW
+      "forms.pinoyseoul.com":    `https://docs.google.com/forms/u/0/create${auth}`,
+      "sites.pinoyseoul.com":    `https://sites.google.com/u/0/new${auth}`,
 
-      // 🖼️ SLIDES: Creates a BRAND NEW PRESENTATION instantly
-      "slides.pinoyseoul.com":   `https://slides.new`,
-
-      // 📝 FORMS: Creates a BRAND NEW FORM instantly
-      "forms.pinoyseoul.com":    `https://forms.new`,
-
-      // 🏠 SITES: Creates a BRAND NEW GOOGLE SITE instantly
-      "sites.pinoyseoul.com":    `https://sites.new`,
-
-      // 💡 KEEP: Creates a NEW NOTE instantly
-      "keep.pinoyseoul.com":     `https://keep.new`,
-
-      // ✅ TASKS: Opens Tasks in full view (Add Task focus)
-      "tasks.pinoyseoul.com":    `https://assistant.google.com/tasks`,
-
-      // 💻 SCRIPTS: Jumps to ALL Apps Script projects
-      "scripts.pinoyseoul.com":  `https://script.google.com/home/all`,
-
-      // 👤 CONTACTS: Opens "CREATE NEW CONTACT" screen instantly
-      "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
+      // 💡 KEEP/TASKS/CONTACTS
+      "keep.pinoyseoul.com":     `https://keep.google.com/u/0/${auth}`,
+      "tasks.pinoyseoul.com":    `https://assistant.google.com/tasks?hd=${domain}`,
+      "contacts.pinoyseoul.com": `https://contacts.google.com/new?authuser=${domain}`,
+      "scripts.pinoyseoul.com":  `https://script.google.com/home/all?authuser=${domain}`,
 
       // 🛡️ ADMIN: Direct access to USER MANAGEMENT
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
@@ -60,7 +51,6 @@ export default {
       return Response.redirect(target, 302);
     }
 
-    // Default behavior if not a mapped subdomain
     return fetch(request);
   },
 };
