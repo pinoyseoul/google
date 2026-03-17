@@ -1,0 +1,9 @@
+name = "google-productivity-redirects"
+main = "src/index.js"
+compatibility_date = "2024-03-17"
+
+[observability]
+enabled = true
+
+# Domains are added via Cloudflare Dashboard or Wrangler CLI
+# To add a domain: wrangler domains add drive.pinoyseoul.com
