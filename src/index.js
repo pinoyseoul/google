@@ -41,6 +41,9 @@ export default {
       "contacts.pinoyseoul.com": `https://contacts.google.com/new?authuser=${domain}`,
       "scripts.pinoyseoul.com":  `https://script.google.com/home/all?authuser=${domain}`,
 
+      // ✍️ BLOGGER: NEW BLOG POST
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/post/edit/new?authuser=${domain}`,
+
       // 🛡️ ADMIN: Direct access to USER MANAGEMENT
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
