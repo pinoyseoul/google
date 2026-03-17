@@ -10,18 +10,19 @@ export default {
       "drive.pinoyseoul.com":    `https://drive.google.com/drive/u/0/shared-drives`,
 
       // 📄 DOCS/SHEETS/SLIDES: NEW Actions
-      "docs.pinoyseoul.com":     `https://docs.google.com/document/u/0/create`,
-      "sheets.pinoyseoul.com":   `https://docs.google.com/spreadsheets/u/0/create`,
-      "slides.pinoyseoul.com":   `https://docs.google.com/presentation/u/0/create`,
+      // .new shortcuts support /a/domain/ and authuser in the URL path
+      "docs.pinoyseoul.com":     `https://docs.new/a/${domain}/`,
+      "sheets.pinoyseoul.com":   `https://sheets.new/a/${domain}/`,
+      "slides.pinoyseoul.com":   `https://slides.new/a/${domain}/`,
 
       // 📧 MAIL: NEW COMPOSE
       "mail.pinoyseoul.com":     `https://mail.google.com/mail/u/0/?view=cm&fs=1`,
 
       // 🎥 MEET: NEW MEETING
-      "meet.pinoyseoul.com":     `https://meet.google.com/new`,
+      "meet.pinoyseoul.com":     `https://meet.new/a/${domain}/`,
 
       // 🗓️ CALENDAR: NEW EVENT
-      "calendar.pinoyseoul.com": `https://calendar.google.com/calendar/u/0/r/eventedit`,
+      "calendar.pinoyseoul.com": `https://cal.new/a/${domain}/`,
 
       // 🧑‍🤝‍🧑 GROUPS: ADMIN GROUP
       "groups.pinoyseoul.com":   `https://groups.google.com/a/${domain}/g/admin`,
@@ -30,14 +31,14 @@ export default {
       "chat.pinoyseoul.com":     `https://chat.google.com/u/0/app/chat/AAQAotoa0bE`,
 
       // 📝 FORMS/SITES: NEW Actions
-      "forms.pinoyseoul.com":    `https://docs.google.com/forms/u/0/create`,
-      "sites.pinoyseoul.com":    `https://sites.google.com/u/0/new`,
+      "forms.pinoyseoul.com":    `https://forms.new/a/${domain}/`,
+      "sites.pinoyseoul.com":    `https://sites.new/a/${domain}/`,
 
-      // 💡 KEEP: NEW NOTE Action (Force full-screen creation)
-      "keep.pinoyseoul.com":     `https://keep.google.com/u/0/#create`,
+      // 💡 KEEP: NEW NOTE Action
+      "keep.pinoyseoul.com":     `https://keep.new/a/${domain}/`,
 
-      // ✅ TASKS: FULL SCREEN TASK DASHBOARD (with focus on creation)
-      "tasks.pinoyseoul.com":    `https://tasks.google.com/embed/?origin=https://mail.google.com&fullWidth=1`,
+      // ✅ TASKS: NEW TASK
+      "tasks.pinoyseoul.com":    `https://tasks.new/a/${domain}/`,
 
       // 👤 CONTACTS: NEW CONTACT
       "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
@@ -45,8 +46,9 @@ export default {
       // 💻 SCRIPT: ALL PROJECTS
       "script.pinoyseoul.com":   `https://script.google.com/home/all`,
 
-      // ✍️ BLOGGER: NEW BLOG POST (Using the Edit URL logic)
-      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/post/edit/new/${blogId}`,
+      // ✍️ BLOGGER: NEW BLOG POST
+      // Blogger uses a different auth pattern. Switching to a direct service URL that triggers account check.
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog-post.g?blogID=${blogId}`,
 
       // 🛡️ ADMIN: USER MANAGEMENT
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
@@ -57,7 +59,8 @@ export default {
     if (targetUrl) {
       /**
        * 🛡️ THE ENFORCER (Ironclad Method):
-       * Bypasses personal accounts and forces Workspace login.
+       * By using the /a/domain/ prefix on the ServiceLogin, we force Google to 
+       * recognize the session for that Workspace organization.
        */
       const enforcerUrl = `https://www.google.com/a/${domain}/ServiceLogin?continue=${encodeURIComponent(targetUrl)}`;
       
