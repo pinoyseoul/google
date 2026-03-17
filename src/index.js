@@ -9,19 +9,19 @@ export default {
       // 📂 DRIVE: Jumps straight to TEAM SHARED DRIVES
       "drive.pinoyseoul.com":    `https://drive.google.com/drive/shared-drives`,
 
-      // 📄 DOCS/SHEETS/SLIDES: Direct Creation
-      "docs.pinoyseoul.com":     `https://docs.new`,
-      "sheets.pinoyseoul.com":   `https://sheets.new`,
-      "slides.pinoyseoul.com":   `https://slides.new`,
+      // 📄 DOCS/SHEETS/SLIDES: Direct Creation (Standard Workspace Paths)
+      "docs.pinoyseoul.com":     `https://docs.google.com/document/create`,
+      "sheets.pinoyseoul.com":   `https://docs.google.com/spreadsheets/create`,
+      "slides.pinoyseoul.com":   `https://docs.google.com/presentation/create`,
 
       // 📧 MAIL: NEW COMPOSE
       "mail.pinoyseoul.com":     `https://mail.google.com/mail/?view=cm&fs=1`,
 
       // 🎥 MEET: NEW MEETING
-      "meet.pinoyseoul.com":     `https://meet.new`,
+      "meet.pinoyseoul.com":     `https://meet.google.com/new`,
 
       // 🗓️ CALENDAR: NEW EVENT
-      "calendar.pinoyseoul.com": `https://cal.new`,
+      "calendar.pinoyseoul.com": `https://calendar.google.com/calendar/u/0/r/eventedit`,
 
       // 🧑‍🤝‍🧑 GROUPS: ADMIN GROUP
       "groups.pinoyseoul.com":   `https://groups.google.com/a/${domain}/g/admin`,
@@ -30,14 +30,14 @@ export default {
       "chat.pinoyseoul.com":     `https://chat.google.com/app/chat/AAQAotoa0bE`,
 
       // 📝 FORMS/SITES: Direct Creation
-      "forms.pinoyseoul.com":    `https://forms.new`,
-      "sites.pinoyseoul.com":    `https://sites.new`,
+      "forms.pinoyseoul.com":    `https://docs.google.com/forms/create`,
+      "sites.pinoyseoul.com":    `https://sites.google.com/new`,
 
-      // 💡 KEEP: NEW NOTE Action
-      "keep.pinoyseoul.com":     `https://keep.new`,
+      // 💡 KEEP: NEW NOTE (Force create UI)
+      "keep.pinoyseoul.com":     `https://keep.google.com/#create`,
 
-      // ✅ TASKS: NEW TASK Action
-      "tasks.pinoyseoul.com":    `https://tasks.new`,
+      // ✅ TASKS: Dashboard (Best available for full view)
+      "tasks.pinoyseoul.com":    `https://calendar.google.com/calendar/r/tasks`,
 
       // 👤 CONTACTS/💻 SCRIPT
       "contacts.pinoyseoul.com": `https://contacts.google.com/new`,
@@ -55,7 +55,8 @@ export default {
     if (actionTarget) {
       /**
        * 🛡️ THE SMART IDENTITY ENFORCER:
-       * Using /a/domain/ServiceLogin ensures the correct Workspace session is used.
+       * Using /a/domain/ServiceLogin ensures the correct Workspace session is used 
+       * and blocks personal account fallback.
        */
       const enforcerUrl = `https://www.google.com/a/${domain}/ServiceLogin?continue=${encodeURIComponent(actionTarget)}`;
       
