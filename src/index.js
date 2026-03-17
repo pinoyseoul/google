@@ -5,7 +5,6 @@ export default {
     const domain = "pinoyseoul.com";
     const blogId = "1152873755750876729";
 
-    // Append ?authuser=pinoyseoul.com to force the target app to select the correct session
     const actions = {
       "drive.pinoyseoul.com":    `https://drive.google.com/drive/shared-drives?authuser=${domain}`,
       "docs.pinoyseoul.com":     `https://docs.google.com/document/create?authuser=${domain}`,
@@ -18,27 +17,22 @@ export default {
       "chat.pinoyseoul.com":     `https://chat.google.com/app/chat/AAQAotoa0bE?authuser=${domain}`,
       "forms.pinoyseoul.com":    `https://docs.google.com/forms/create?authuser=${domain}`,
       "sites.pinoyseoul.com":    `https://sites.google.com/new?authuser=${domain}`,
-      "keep.pinoyseoul.com":     `https://keep.google.com/?authuser=${domain}#create`,
-      "tasks.pinoyseoul.com":    `https://calendar.google.com/calendar/r/tasks?authuser=${domain}`,
+      
+      // ✅ CONTACTS & SCRIPTS (Working Actions)
       "contacts.pinoyseoul.com": `https://contacts.google.com/new?authuser=${domain}`,
       "script.pinoyseoul.com":   `https://script.google.com/home/all?authuser=${domain}`,
-      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/post/edit/new/${blogId}?authuser=${domain}`,
+      
+      // ✍️ BLOGGER: Direct to the specific Blog Dashboard (Create New is blocked externally)
+      "blog.pinoyseoul.com":     `https://www.blogger.com/blog/posts/${blogId}?authuser=${domain}`,
+      
+      // 🛡️ ADMIN
       "admin.pinoyseoul.com":    `https://admin.google.com/ac/users`
     };
 
     const targetUrl = actions[host];
 
     if (targetUrl) {
-      /**
-       * 🛡️ THE ULTIMATE ZERO-FRICTION ENFORCER:
-       * We use the standard Accounts ServiceLogin (not the /a/domain/ one to prevent 403s on Keep/Blogger).
-       * 1. 'hd=pinoyseoul.com' forces Google to verify a PinoySeoul session exists. If not, it shows the login screen.
-       * 2. If already logged in, ServiceLogin skips the prompt entirely (Zero Friction).
-       * 3. The 'continue' URL contains 'authuser=pinoyseoul.com', which guarantees that once the user 
-       *    lands on Docs/Drive/Blogger, it doesn't accidentally fall back to their personal Gmail.
-       */
       const enforcerUrl = `https://accounts.google.com/ServiceLogin?hd=${domain}&continue=${encodeURIComponent(targetUrl)}`;
-      
       return Response.redirect(enforcerUrl, 302);
     }
 
