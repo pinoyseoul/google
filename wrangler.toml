@@ -63,9 +63,3 @@ zone_name = "pinoyseoul.com"
 [[routes]]
 pattern = "admin.pinoyseoul.com/"
 zone_name = "pinoyseoul.com"
-
-# SSO LOGIN CAPTURE FOR GOOGLE SERVICES
-# Ensures deep links also trigger the network unlock
-[[routes]]
-pattern = "*.pinoyseoul.com/cdn-cgi/access/login*"
-zone_name = "pinoyseoul.com"
