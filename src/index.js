@@ -40,7 +40,7 @@ export default {
       "contacts.pinoyseoul.com": "https://contacts.google.com/new",
       "script.pinoyseoul.com":   "https://script.google.com/home/all",
       "blog.pinoyseoul.com":     "https://www.blogger.com/blog/posts/" + blogId,
-      "admin.pinoyseoul.com":    "https://admin.google.com/ac/users"
+      // "admin.pinoyseoul.com":    "https://admin.google.com/ac/users"
     };
 
     const actionTarget = targets[host];

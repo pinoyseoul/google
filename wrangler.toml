@@ -60,6 +60,3 @@ zone_name = "pinoyseoul.com"
 [[routes]]
 pattern = "blog.pinoyseoul.com/"
 zone_name = "pinoyseoul.com"
-[[routes]]
-pattern = "admin.pinoyseoul.com/"
-zone_name = "pinoyseoul.com"
