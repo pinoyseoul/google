@@ -5,6 +5,10 @@ compatibility_date = "2024-03-17"
 [observability]
 enabled = true
 
+[[kv_namespaces]]
+binding = "SSO_STATE"
+id = "8a9f19dda53e4d5d8cb7c157769ca542"
+
 # ULTRA-LIGHT GOOGLE SHORTCUTS: 
 # These routes only wake up the worker for the initial login/redirect.
 # This prevents the 8.9k request burn by ignoring background assets.
@@ -58,4 +62,10 @@ pattern = "blog.pinoyseoul.com/"
 zone_name = "pinoyseoul.com"
 [[routes]]
 pattern = "admin.pinoyseoul.com/"
+zone_name = "pinoyseoul.com"
+
+# SSO LOGIN CAPTURE FOR GOOGLE SERVICES
+# Ensures deep links also trigger the network unlock
+[[routes]]
+pattern = "*.pinoyseoul.com/cdn-cgi/access/login*"
 zone_name = "pinoyseoul.com"
